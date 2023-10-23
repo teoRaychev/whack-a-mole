@@ -45,6 +45,18 @@
 
 }
 
+.mole.successful {
+  border: solid green;
+}
+
+.mole.missed {
+  border: solid red;
+}
+
+.mole.visible {
+  border: solid blue;
+}
+
 .mole.visible {
   background-image: url('assets/mole.png');
 }
@@ -52,7 +64,7 @@
 .game-input, .game-button {
   width: 150px;
   height: 30px; 
-  margin: 10px; 
+  margin: 7px; 
   text-align: center;
   vertical-align: auto;
 }

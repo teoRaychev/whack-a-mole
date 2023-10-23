@@ -18,26 +18,16 @@ const App: React.FC = () => {
 
 
   const handleMoleClick = (row: number, col: number) => {
-    const gridCells = document.querySelectorAll('.grid-cell');
-
     if(moleVisible && row === molePosition.row && col === molePosition.col) {
       setScore(score + 1 );
       setSuccessfulClicks((SuccessfulClicks) => SuccessfulClicks + 1);
       setMoleVisible(false);
       setMoleDuration((MoleDuration) => Math.max(50, MoleDuration - 50));
       setTotalClicks(totalClicks + 1);
-      gridCells[row*3 + col].classList.add('successful'); // works for 4x4 grid
-      setTimeout(() => {
-        gridCells[row*3 + col].classList.remove('successful');
-      }, 250);
     }else {
       setMissedClicks((MissedClicks) => MissedClicks + 1);
       setMoleDuration((MoleDuration) => Math.min(durationUntilNextMole, MoleDuration + 100));
       setTotalClicks(totalClicks + 1);
-      gridCells[row * 3 + col].classList.add('missed');
-      setTimeout(() => {
-        gridCells[row *3 + col].classList.remove('missed'); 
-      }, 250);
     }
   };
   const rate = totalClicks > 0 ? (successfulClicks/(totalClicks))*100 : 0;
@@ -107,7 +97,6 @@ const App: React.FC = () => {
               key={`${row}-${col}`}
               visible={moleVisible && row === molePosition.row && col === molePosition.col}
               onClick = {() => handleMoleClick(row, col)}
-             // gridCellRef={gridCellRefs[row * 4 + col]}
             />
           ))
         )}

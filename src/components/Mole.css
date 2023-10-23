@@ -1,0 +1,11 @@
+.mole.successful {
+    border: solid green;
+}
+
+.mole.missed {
+    border: solid red 10px;
+}
+
+.mole.visible {
+    border: solid blue;
+}
