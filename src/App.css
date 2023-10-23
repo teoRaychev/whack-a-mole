@@ -1,0 +1,78 @@
+/*.grid {
+  width: 381px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 auto;
+}*/
+
+/* src/App.css */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.score {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-gap: 10px;
+  border: #007bff;
+  border-radius: 10px;
+
+}
+.grid-cell {
+  background-color: #f0f0f0;
+}
+.grid-cell.successful{
+  border: 2px solid green;
+}
+
+.mole {
+  width: 100px;
+  height: 100px;
+  background-image: url('assets/hole.png');
+  background-size: cover;
+  cursor: pointer;
+  border: #007bff;
+  border-radius: 10px;
+
+}
+
+.mole.visible {
+  background-image: url('assets/mole.png');
+}
+
+.game-input, .game-button {
+  width: 150px;
+  height: 30px; 
+  margin: 10px; 
+  text-align: center;
+  vertical-align: auto;
+}
+
+.game-input {
+  font-size: 13px;
+  padding: 3px;
+  border-radius: 10px;
+  border-color: #007bff;
+}
+
+.game-button{
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.score {
+  font-size: small;
+}
+
