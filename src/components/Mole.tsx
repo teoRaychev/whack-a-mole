@@ -1,33 +1,35 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-export const Mole: React.FC<{ visible: boolean; onClick: () => void }> = ({
-  visible,
-  onClick,
-}) => {
-  const gridCellRef = React.createRef<HTMLDivElement>();
+export const Mole: React.FC<{
+  visible: boolean;
+  style: object;
+  onClick: () => void;
+}> = ({ visible, onClick, style }) => {
+  /* const [borderColor, setBorderColor] = useState("transparent");
 
-  const applyClassAndRemove = (className: string) => {
-    gridCellRef.current?.classList.add(className);
-    setTimeout(() => {
-      gridCellRef.current?.classList.remove(className);
-    }, 250);
-  };
   useEffect(() => {
-    return () => {
-      if (gridCellRef.current) {
-        gridCellRef.current.classList.remove("successful", "missed");
-      }
-    };
-  }, []);
+    if (!visible) setBorderColor("transparent");
+  }, [visible]);
+
+  const handleOnMoleClick = () => {
+    if (visible) {
+      onClick();
+      setBorderColor("green");
+      setTimeout(() => {
+        setBorderColor("transparent");
+      }, 750);
+    } else {
+      setBorderColor("red");
+      setTimeout(() => {
+        setBorderColor("transparent");
+      }, 750);
+    }
+  };*/
   return (
     <div
       className={`mole ${visible ? "visible" : ""}`}
-      ref={gridCellRef}
-      onClick={() => {
-        onClick();
-        if (visible) applyClassAndRemove("successful");
-        else applyClassAndRemove("missed");
-      }}
+      style={style}
+      onClick={onClick}
     ></div>
   );
 };
