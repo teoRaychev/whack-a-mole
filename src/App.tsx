@@ -14,21 +14,48 @@ const App: React.FC = () => {
   const [totalClicks, setTotalClicks] = useState(0);
   const [successRate, setSuccessRate] = useState(100);
   const durationUntilNextMole = 1500;
-  // const gridCellRefs = Array.from({ length: 16 }, () => useRef(null));
+  const [moleBorderState, setMoleBorderState] = useState(
+    Array(16).fill("neutral")
+  );
 
   const handleMoleClick = (row: number, col: number) => {
+    const moleIndex = row * 4 + col;
     if (moleVisible && row === molePosition.row && col === molePosition.col) {
       setScore(score + 1);
       setSuccessfulClicks((SuccessfulClicks) => SuccessfulClicks + 1);
       setMoleVisible(false);
       setMoleDuration((MoleDuration) => Math.max(50, MoleDuration - 50));
       setTotalClicks(totalClicks + 1);
+      setMoleBorderState((prevState) => {
+        const updatedState = [...prevState];
+        updatedState[moleIndex] = "green";
+        return updatedState;
+      });
+      setTimeout(() => {
+        setMoleBorderState((prevState) => {
+          const updatedState = [...prevState];
+          updatedState[moleIndex] = "transparent";
+          return updatedState;
+        });
+      }, 600);
     } else {
       setMissedClicks((MissedClicks) => MissedClicks + 1);
       setMoleDuration((MoleDuration) =>
         Math.min(durationUntilNextMole, MoleDuration + 100)
       );
       setTotalClicks(totalClicks + 1);
+      setMoleBorderState((prevState) => {
+        const updatedState = [...prevState];
+        updatedState[moleIndex] = "red";
+        return updatedState;
+      });
+      setTimeout(() => {
+        setMoleBorderState((prevState) => {
+          const updatedState = [...prevState];
+          updatedState[moleIndex] = "transparent";
+          return updatedState;
+        });
+      }, 600);
     }
   };
   const rate = totalClicks > 0 ? (successfulClicks / totalClicks) * 100 : 0;
@@ -98,17 +125,21 @@ const App: React.FC = () => {
       </div>
       <div className="grid">
         {[0, 1, 2, 3].map((row) =>
-          [0, 1, 2, 3].map((col) => (
-            <Mole
-              key={`${row}-${col}`}
-              visible={
-                moleVisible &&
-                row === molePosition.row &&
-                col === molePosition.col
-              }
-              onClick={() => handleMoleClick(row, col)}
-            />
-          ))
+          [0, 1, 2, 3].map((col) => {
+            const moleIndex = row * 4 + col;
+            return (
+              <Mole
+                key={`${row}-${col}`}
+                style={{ border: `5px solid ${moleBorderState[moleIndex]}` }}
+                visible={
+                  moleVisible &&
+                  row === molePosition.row &&
+                  col === molePosition.col
+                }
+                onClick={() => handleMoleClick(row, col)}
+              />
+            );
+          })
         )}
       </div>
     </div>
